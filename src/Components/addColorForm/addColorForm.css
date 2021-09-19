@@ -1,0 +1,49 @@
+.colorForm {
+  margin: 0;
+  padding: 100px;
+  overflow-x: hidden;
+}
+
+.colorForm .color {
+  margin-bottom: 10px;
+  display: inline;
+}
+
+.colorForm .Pickcolor {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.colorForm #colorText {
+  margin-left: 20px;
+}
+
+.colorForm #valueText {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.colorForm .selectList {
+  display: inline;
+  margin-top: 20px;
+}
+.colorForm .selectList .select {
+  padding: 5px;
+  margin-left: 35px;
+  width: 34%;
+}
+
+.colorForm .addItem {
+  /* float: right; */
+  margin-top: 20px;
+  margin-left: 100px;
+  width: 100%;
+}
+
+Button .add {
+  width: 100%;
+}
+
+.ml-1 {
+  margin-left: 20px;
+}

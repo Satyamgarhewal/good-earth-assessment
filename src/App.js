@@ -1,12 +1,10 @@
 // Dependencies
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
 // Components
 import AddColor from './Pages/AddColor/addColor';
 import Visualize from './Pages/visualize/visualize';
 // CSS
 import './App.css';
-import Sidebar from './Pages/Sidebar/sidebar';
 
 function App() {
   return (
