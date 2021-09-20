@@ -1,5 +1,9 @@
 import React from 'react';
-import { setLocalStorage, getLocalStorage } from '../../utils/localStorage';
+import {
+  setLocalStorage,
+  getLocalStorage,
+  removeLocalStorage,
+} from '../../utils/localStorage';
 import Block from '../block/block';
 
 class DisplayList extends React.Component {
@@ -26,20 +30,39 @@ class DisplayList extends React.Component {
     const { value, name } = e.target;
     const { list1, list2 } = this.state;
     let newList2 = [...list2, list1[value]];
+    let action = '';
+    let key = '';
+    let passingValue;
+    passingValue = list1[value];
+    let list1State;
     let newList1 = list1.splice(value, 1);
-    this.setState({
-      list2: newList2,
-    });
+    this.setState(
+      {
+        list2: newList2,
+      },
+      () => {}
+    );
+    list1State = this.state.list1;
+    action = 'setList2Item';
+    key = 'list2';
+    setLocalStorage(action, key, passingValue);
   };
   handleList2Change = (e) => {
     console.log('target', e);
     const { value, name } = e.target;
     const { list1, list2 } = this.state;
     let newList1 = [...list1, list2[value]];
+    let action = '';
+    let key = '';
+    let passingValue;
+    passingValue = list2[value];
     let newList2 = list2.splice(value, 1);
     this.setState({
       list1: newList1,
     });
+    action = 'setList1Item';
+    key = 'list1';
+    setLocalStorage(action, key, passingValue);
   };
   render() {
     const { list1, list2 } = this.state;

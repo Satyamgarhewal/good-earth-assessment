@@ -52,3 +52,11 @@ export function getLocalStorage(key) {
     return e;
   }
 }
+
+export function removeLocalStorage(action, key, value) {
+  console.log('value >>>>>>>>>>', value);
+  if (action === 'removefromList1') {
+    let listToRemove = JSON.parse(localStorage.getItem(key));
+    let newlistToRemove = listToRemove.splice(value, 1);
+  }
+}
