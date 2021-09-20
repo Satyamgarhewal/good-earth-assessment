@@ -1,3 +1,13 @@
 .blockDisplay {
   display: inline-block;
 }
+
+.selectList {
+  display: inline;
+  margin-top: 20px;
+}
+select {
+  padding: 10px;
+  margin-left: 35px;
+  width: 34%;
+}

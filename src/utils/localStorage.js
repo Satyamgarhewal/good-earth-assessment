@@ -40,23 +40,18 @@ export function setLocalStorage(action, key, value) {
     } catch (e) {
       console.log('error while changing list 2');
     }
+  } else if (action === 'rewriteList1') {
+    localStorage.setItem(key, value);
+  } else if (action === 'rewriteList2') {
+    localStorage.setItem(key, value);
   }
 }
 
 export function getLocalStorage(key) {
   try {
     let response = JSON.parse(localStorage.getItem(key));
-    console.log('response fetched >>>>>>>', response);
     return response;
   } catch (e) {
     return e;
-  }
-}
-
-export function removeLocalStorage(action, key, value) {
-  console.log('value >>>>>>>>>>', value);
-  if (action === 'removefromList1') {
-    let listToRemove = JSON.parse(localStorage.getItem(key));
-    let newlistToRemove = listToRemove.splice(value, 1);
   }
 }

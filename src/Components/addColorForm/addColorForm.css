@@ -30,7 +30,8 @@
 .colorForm .selectList .select {
   padding: 5px;
   margin-left: 35px;
-  width: 34%;
+  margin-top: 10px;
+  width: 30%;
 }
 
 .colorForm .addItem {

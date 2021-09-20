@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Block(props) {
-  console.log('porps>>>>>>>>>>>>', props);
   const { backgroundColor, blockValue, listValue } = props.item;
   return (
     <div className="blockBox">

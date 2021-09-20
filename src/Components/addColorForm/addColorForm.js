@@ -11,6 +11,7 @@ class AddColorForm extends React.Component {
       displayColorPicker: false,
       blockValue: '',
       listValue: '',
+      isFormEmpty: false,
     };
     this.popover = {
       position: 'absolute',
@@ -24,6 +25,7 @@ class AddColorForm extends React.Component {
       bottom: '0px',
       left: '0px',
     };
+    this.buttonName = 'Add Item';
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleChangeComplete = this.handleChangeComplete.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -44,45 +46,56 @@ class AddColorForm extends React.Component {
     let action = '';
     let list1Response = getLocalStorage('list1');
     let list2Response = getLocalStorage('list2');
+    setTimeout(function () {
+      this.buttonName = 'Added';
+    }, 2000);
 
-    if (listValue === '1') {
-      if (!list1Response) {
-        action = 'createList1';
-        setLocalStorage(action, 'list1', list1Array);
+    if (backgroundColor && blockValue ** listValue) {
+      if (listValue === '1') {
+        if (!list1Response) {
+          action = 'createList1';
+          setLocalStorage(action, 'list1', list1Array);
+        }
+        let list1Obj = {
+          backgroundColor: backgroundColor,
+          blockValue: blockValue,
+          listValue: listValue,
+        };
+        action = 'setList1Item';
+        setLocalStorage(action, 'list1', list1Obj);
+      } else if (listValue === '2') {
+        if (!list2Response) {
+          action = 'createList2';
+          setLocalStorage(action, 'list2', list2Array);
+        }
+        let list2Obj = {
+          backgroundColor: backgroundColor,
+          blockValue: blockValue,
+          listValue: listValue,
+        };
+        action = 'setList2Item';
+        setLocalStorage(action, 'list2', list2Obj);
+      } else {
+        if (!list1Response) {
+          action = 'createList1';
+          setLocalStorage(action, 'list1', list1Array);
+        } else if (!list2Response) {
+          action = 'createList2';
+          setLocalStorage(action, 'list2', list2Array);
+        }
       }
-      let list1Obj = {
-        backgroundColor: backgroundColor,
-        blockValue: blockValue,
-        listValue: listValue,
-      };
-      action = 'setList1Item';
-      setLocalStorage(action, 'list1', list1Obj);
-    } else if (listValue === '2') {
-      if (!list2Response) {
-        action = 'createList2';
-        setLocalStorage(action, 'list2', list2Array);
-      }
-      let list2Obj = {
-        backgroundColor: backgroundColor,
-        blockValue: blockValue,
-        listValue: listValue,
-      };
-      action = 'setList2Item';
-      setLocalStorage(action, 'list2', list2Obj);
+      this.setState({
+        backgroundColor: '',
+        blockValue: '',
+        listValue: '',
+        isFormEmpty: false,
+      });
+      this.buttonName = 'Add Item';
     } else {
-      if (!list1Response) {
-        action = 'createList1';
-        setLocalStorage(action, 'list1', list1Array);
-      } else if (!list2Response) {
-        action = 'createList2';
-        setLocalStorage(action, 'list2', list2Array);
-      }
+      this.setState({
+        isFormEmpty: true,
+      });
     }
-    this.setState({
-      backgroundColor: '',
-      blockValue: '',
-      listValue: '',
-    });
   }
 
   handleFormChange(e) {
@@ -101,8 +114,13 @@ class AddColorForm extends React.Component {
   };
 
   render() {
-    const { backgroundColor, displayColorPicker, blockValue, listValue } =
-      this.state;
+    const {
+      backgroundColor,
+      displayColorPicker,
+      blockValue,
+      listValue,
+      isFormEmpty,
+    } = this.state;
     return (
       <div>
         <form className="colorForm" onSubmit={this.handleFormSubmit}>
@@ -147,7 +165,7 @@ class AddColorForm extends React.Component {
             <label>
               Value:
               <input
-                type="text"
+                type="number"
                 id="valueText"
                 name="blockValue"
                 value={blockValue}
@@ -177,10 +195,25 @@ class AddColorForm extends React.Component {
               class="btn btn-primary"
               onClick={this.handleFormSubmit}
             >
-              Add Item
+              {this.buttonName}
             </button>
           </div>
         </form>
+        <div className="row">
+          <div className="col-md-8">
+            {isFormEmpty ? (
+              <div
+                className="alert alert-danger"
+                role="alert"
+                style={{ marginRight: '50px', marginTop: '10px' }}
+              >
+                Please fill all the fields Correctly!
+              </div>
+            ) : (
+              <div style={{ marginTop: '5px' }}></div>
+            )}
+          </div>
+        </div>
       </div>
     );
   }
